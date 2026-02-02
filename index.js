@@ -58,6 +58,28 @@ app.patch('/user/:id',(req,res,next)=>{
 })
 
 
+/*3. Create an API that deletes a User by ID. The user id should be retrieved from either the request body or optional params. (1 Grade)
+Note: Remember to delete the user from the file
+o URL: DELETE /user{/:id} */
+
+app.delete('/user/:id',(req,res,next)=>{
+    //destructuring the id from params
+    const {id}=req.params;
+    //check if user with given id exists
+    const users = readFileData();
+    const userIndex = users.findIndex((user) => user.userId === parseInt(id));
+    if(userIndex === -1){
+        return res.status(404).json({message:"user not found", success:false});
+    }
+    //if exists delete the user
+    users.splice(userIndex,1);
+    //write updated users array back to the file
+    fs.writeFileSync('users.json',JSON.stringify(users,null,2));
+    //send success response
+    res.status(200).json({message:"user deleted successfully", success:true});
+})
+
+
 
 //listening on port 3000
 app.listen(port, () => { 
