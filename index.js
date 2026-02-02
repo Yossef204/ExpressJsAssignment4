@@ -29,13 +29,33 @@ app.post('/user',(req,res,next)=>{
         return res.status(409).json({message:"user already exists" , success:false})
     }
     //if not exists add new user to the users array
-    users.push({name,email,password});
+    users.push({name,email,password,userId:users.length + 1});
     //write updated users array back to the file
     fs.writeFileSync('users.json',JSON.stringify(users,null,2));
     //send success response
     res.status(201).json({message:"user added successfully", success:true});
 });
 
+
+/* 2. Create an API that updates an existing user's name, age, or email by their ID. The user ID should be retrieved from the params. (1 Grade)
+ Note: Remember to update the corresponding values in the JSON file*/
+
+app.patch('/user/:id',(req,res,next)=>{
+    //destructuring the request body
+    const {id}=req.params;
+    //check if user with given id exists
+    const users = readFileData();
+    const userExists = users.findIndex((user) => user.userId === parseInt(id));
+    //if exists update the user details
+    if(userExists === -1){
+        return res.status(404).json({message:"user not found", success:false});
+    }
+    //write updated users array back to the file
+    Object.assign(users[userExists], req.body);
+    fs.writeFileSync('users.json',JSON.stringify(users,null,2));
+    //send success response
+    return res.status(200).json({message:"user updated successfully", success:true});
+})
 
 
 

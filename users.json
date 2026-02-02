@@ -1,17 +1,15 @@
 [
+  {},
   {
     "name": "yossef",
     "email": "y@y.com",
-    "password": "12345"
+    "password": "2468",
+    "userId": 2
   },
   {
     "name": "mahmoud",
-    "email": "mahmoud@example.com",
-    "password": "12345"
-  },
-  {
-    "name": "yossef2",
-    "email": "y@y2.com",
-    "password": "12345"
+    "email": "m@m.com",
+    "password": "12345",
+    "userId": 3
   }
 ]
