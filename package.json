@@ -1,0 +1,24 @@
+{
+  "name": "assignment-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "node --watch ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yossef204/ExpressJsAssignment4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Yossef204/ExpressJsAssignment4/issues"
+  },
+  "homepage": "https://github.com/Yossef204/ExpressJsAssignment4#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
