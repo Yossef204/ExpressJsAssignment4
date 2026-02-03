@@ -80,6 +80,23 @@ app.delete('/user/:id',(req,res,next)=>{
 })
 
 
+/**Create an API that gets a user by their name. The name will be provided as a query parameter. (1 Grade)
+o URL: GET /user/getByName */
+app.get('/user/name',(req,res,next)=>{
+    //destructing the name from query params
+    const {name}=req.query;
+    const users = readFileData();
+    //check name existing
+    const userExist = users.find((user) => user.name === name);
+    //if exists return user details
+    if(userExist){
+        return res.status(200).json({message:"user found", success:true, data:userExist});
+    }
+    //if not exists return user not found
+    res.status(404).json({message:"user not found", success:false});
+});
+
+
 
 //listening on port 3000
 app.listen(port, () => { 
