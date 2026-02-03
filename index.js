@@ -132,6 +132,24 @@ app.get("/user/id",(req,res,next)=>{
     return res.status(200).json({message:"users found", success:true, data:userFiltered});
 })
 
+/**7. Create an API that gets User by ID. (1 Grade)
+o URL: GET /user/:id
+o Output: */
+app.get("/user/:id",(req,res,next)=>{
+    //destructuring id from params
+    const {id} = req.params;
+    //reading users from file
+    const users = readFileData();
+    //check if user with given id exists
+    const userExist = users.find((user)=> user.userId === parseInt(id));
+    //if not exists return user not found
+    if(!userExist){
+        return res.status(404).json({message:"user not found", success:false});
+    }
+    //if exists return user details
+    return res.status(200).json({message:"user found", success:true, data:userExist});
+});
+
 //listening on port 3000
 app.listen(port, () => {
   console.log("application is running on port " + port);
