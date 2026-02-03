@@ -113,6 +113,25 @@ app.get("/user", (req, res, next) => {
   return res.status(200).json({message:"users found users are:", success:true, data:users});
 });
 
+/*Create an API that filters users by minimum id. (1 Grade)
+o URL: GET /user/filter*/
+app.get("/user/id",(req,res,next)=>{
+    //destructuring minAge from query params
+    const {id} = req.query;
+    //parsing minAge to integer
+    // const minId = parseInt(id);
+    //reading users from file
+    const users = readFileData();
+    //filtering users based on minAge
+    userFiltered = users.filter((user)=> user.userId >= id);
+    //if no users found return appropriate message
+    if(userFiltered.length === 0){
+        return res.status(404).json({message:"no users found with the given age", success:false});
+    }
+    //return filtered users
+    return res.status(200).json({message:"users found", success:true, data:userFiltered});
+})
+
 //listening on port 3000
 app.listen(port, () => {
   console.log("application is running on port " + port);
